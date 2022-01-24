@@ -5,7 +5,7 @@
       "methods": ["GET"],
       "dest": "/api/ogp",
       "headers": {
-        "Access-Control-Allow-Origin": "https://*.nekozuki.me"
+        "Access-Control-Allow-Origin": "*"
       }
     }
   ]
