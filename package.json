@@ -5,15 +5,15 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jiri3/ogp-api.git"
+    "url": "git+https://github.com/AyumuNekozuki/ogp-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/jiri3/ogp-api/issues"
+    "url": "https://github.com/AyumuNekozuki/ogp-api/issues"
   },
-  "homepage": "https://github.com/jiri3/ogp-api#readme",
+  "homepage": "https://github.com/AyumuNekozuki/ogp-api#readme",
   "devDependencies": {
     "@vercel/node": "^1.7.4"
   },
