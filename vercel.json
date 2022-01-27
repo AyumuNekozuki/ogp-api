@@ -7,6 +7,14 @@
       "headers": {
         "Access-Control-Allow-Origin": "*"
       }
+    },
+    {
+      "src": "/api/ogpimg",
+      "methods": ["GET"],
+      "dest": "/api/ogpimg",
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
     }
   ]
 }
