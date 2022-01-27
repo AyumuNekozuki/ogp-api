@@ -32,7 +32,11 @@ export default async function (req: NowRequest, res: NowResponse) {
         pre[property] = content;
         return pre;
       }, {});
-    res.status(200).json(ogp['image']);
+
+    // res.status(200).json(ogp['image']);
+    res.writeHead(302, {
+      'Location': ogp['image']
+    })
   } catch (e) {
     errorResponce(res);
   }
