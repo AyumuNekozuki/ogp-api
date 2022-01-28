@@ -5,7 +5,8 @@
       "methods": ["GET"],
       "dest": "/api/ogp",
       "headers": {
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "bot"
       }
     },
     {
@@ -13,7 +14,8 @@
       "methods": ["GET"],
       "dest": "/api/ogpimg",
       "headers": {
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "bot"
       }
     }
   ]
