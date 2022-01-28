@@ -6,7 +6,7 @@
       "dest": "/api/ogp",
       "headers": {
         "Access-Control-Allow-Origin": "*",
-        "User-Agent": "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
+        "User-Agent": "facebookexternalhit"
       }
     },
     {
@@ -15,7 +15,7 @@
       "dest": "/api/ogpimg",
       "headers": {
         "Access-Control-Allow-Origin": "*",
-        "User-Agent": "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
+        "User-Agent": "facebookexternalhit"
       }
     }
   ]
