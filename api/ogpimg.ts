@@ -34,9 +34,7 @@ export default async function (req: NowRequest, res: NowResponse) {
       }, {});
 
     // res.status(200).json(ogp['image']);
-    res.writeHead(302, {
-      'Location': ogp['image']
-    })
+    res.redirect(ogp['image']);
   } catch (e) {
     errorResponce(res);
   }
