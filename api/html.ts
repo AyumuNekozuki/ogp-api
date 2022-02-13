@@ -21,7 +21,7 @@ export default async function (req: NowRequest, res: NowResponse) {
     const responce = await axios.get(<string>url);
     const data = responce.data;
     const dom = new JSDOM(data);
-    const meta = dom.window.document.querySelectorAll("head > meta");
+    const meta = dom.window.document.querySelectorAll("html");
 
     // metaからOGPを抽出し、JSON形式に変換する
     const ogp = Array.from(meta)
