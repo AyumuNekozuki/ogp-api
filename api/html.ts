@@ -24,15 +24,7 @@ export default async function (req: NowRequest, res: NowResponse) {
     const meta = dom.window.document.querySelectorAll("html");
 
     // metaからOGPを抽出し、JSON形式に変換する
-    const ogp = Array.from(meta)
-      .filter((element) => element.hasAttribute("property"))
-      .reduce((pre, ogp) => {
-        const property = ogp.getAttribute("property").trim().replace("og:", "");
-        const content = ogp.getAttribute("content");
-        pre[property] = content;
-        return pre;
-      }, {});
-    res.status(200).json(ogp);
+    res.status(200).json(meta);
   } catch (e) {
     errorResponce(res);
   }
