@@ -17,6 +17,15 @@
         "Access-Control-Allow-Origin": "*",
         "User-Agent": "facebookexternalhit"
       }
+    },
+    {
+      "src": "/api/html",
+      "methods": ["GET"],
+      "dest": "/api/html",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "facebookexternalhit"
+      }
     }
   ]
 }
