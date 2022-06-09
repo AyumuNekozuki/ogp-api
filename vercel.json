@@ -19,12 +19,12 @@
       }
     },
     {
-      "src": "/api/html",
+      "src": "/api/nico-shapshot2",
       "methods": ["GET"],
-      "dest": "/api/html",
+      "dest": "/api/nico-shapshot2",
       "headers": {
         "Access-Control-Allow-Origin": "*",
-        "User-Agent": "facebookexternalhit"
+        "User-Agent": "vercel serveless function"
       }
     }
   ]
