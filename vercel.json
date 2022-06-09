@@ -19,9 +19,9 @@
       }
     },
     {
-      "src": "/api/nico-shapshot2",
+      "src": "/api/nico/snapshot2",
       "methods": ["GET"],
-      "dest": "/api/nico-shapshot2",
+      "dest": "/api/nico/shapshot2",
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "User-Agent": "vercel serveless function"
