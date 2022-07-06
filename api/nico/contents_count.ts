@@ -26,12 +26,13 @@ export default async function (req: NowRequest, res: NowResponse) {
   const url_news = 'https://news.nicovideo.jp/search?q=' + keyword;
   const url_3d = 'https://3d.nicovideo.jp/search?word_type=caption&word=' + keyword;
   const url_community = 'https://com.nicovideo.jp/search/' + keyword;
+  const url_dic = 'https://dic.nicovideo.jp/s/al/t/' + keyword + '/rev_created/desc/1-';
   
   // ログイン必須
   // const url_q = 'https://api.q.nicovideo.jp/api/v1/question_books/search?q='+ keyword +'&page=1&per=10&sort=created_at&order=desc&mode=all&type=all';
 
-  // try {
-    const [responce_seiga, responce_ch, responce_blomaga, responce_atsumaru, responce_commons, responce_news, responce_3d, responce_community] = await Promise.all([
+  try {
+    const [responce_seiga, responce_ch, responce_blomaga, responce_atsumaru, responce_commons, responce_news, responce_3d, responce_community, responce_dic] = await Promise.all([
       axios.get(url_seiga),
       axios.get(url_ch),
       axios.get(url_blomaga),
@@ -41,6 +42,7 @@ export default async function (req: NowRequest, res: NowResponse) {
       axios.get(url_3d),
       // axios.get(url_q),
       axios.get(url_community),
+      axios.get(url_dic),
     ]);
 
     // 静画整理
@@ -118,6 +120,22 @@ export default async function (req: NowRequest, res: NowResponse) {
     }
 
 
+    // 大百科
+    const data_dic = responce_dic.data;
+    const dom_dic = new JSDOM(data_dic);
+    const meta_dic = dom_dic.window.document.querySelectorAll(".search-count_results");
+    let textcontent_dic: string = '';
+    if(meta_dic[0] && meta_dic[0].textContent){
+      textcontent_dic = meta_dic[0].textContent;
+      textcontent_dic = textcontent_dic.replace('検索結果: ', '');
+      textcontent_dic = textcontent_dic.replace('件', '');
+      textcontent_dic = textcontent_dic.replace('\n        ', '');
+      textcontent_dic = textcontent_dic.replace('\n      ', '');
+      textcontent_dic = textcontent_dic.replace(',', '');
+    }else{
+      textcontent_dic = '-';
+    }
+
 
     const resdata = {
       'video': meta_seiga[0].textContent,
@@ -130,14 +148,15 @@ export default async function (req: NowRequest, res: NowResponse) {
       'commons': responce_commons.data.data.total,
       'news': textcontent_news,
       '3d': textcontent_3d,
-      // 'q': responce_q.data.data.total,
+      'q': '-',
       'community': textcontent_community,
+      'dic': textcontent_dic,
     }
 
     res.status(200).json(resdata);
-  // } catch (e) {
-  //   errorResponce(res);
-  // }
+  } catch (e) {
+    errorResponce(res);
+  }
 }
 
 function isValidUrlParameter(url: string | string[]): boolean {
