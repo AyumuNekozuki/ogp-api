@@ -26,6 +26,15 @@
         "Access-Control-Allow-Origin": "*",
         "User-Agent": "vercel serveless function"
       }
+    },
+    {
+      "src": "/api/nico/seiga/illust/tag",
+      "methods": ["GET"],
+      "dest": "/api/nico/seiga/illust/tag",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "vercel serveless function"
+      }
     }
   ]
 }
