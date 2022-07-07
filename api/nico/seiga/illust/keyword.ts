@@ -101,6 +101,7 @@ export default async function (req: NowRequest, res: NowResponse) {
             viewCounter: viewCounter,
             commentCounter: commentCounter,
             mylistCounter: mylistCounter,
+            lastResBody: item.querySelectorAll('.thumb_summary')[0].textContent,
           }
           datas.push(contentsdata);
         })

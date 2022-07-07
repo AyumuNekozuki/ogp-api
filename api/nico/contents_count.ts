@@ -48,15 +48,20 @@ export default async function (req: NowRequest, res: NowResponse) {
     // 静画整理
     const data_seiga = responce_seiga.data;
     const dom_seiga = new JSDOM(data_seiga);
-    let meta_seiga = dom_seiga.window.document.querySelectorAll(".tab_table strong");
+    let meta_main = dom_seiga.window.document.querySelectorAll(".tab_table strong");
     
-    meta_seiga.forEach(element => {
+    meta_main.forEach(element => {
       if(element.textContent){
         element.textContent = element.textContent.replace(',', '');
       }else{
         element.textContent = '0';
       }
     });
+
+    let textcontent_illust = dom_seiga.window.document.querySelectorAll("#main .search_tab_on a")[0].textContent;
+    textcontent_illust = textcontent_illust.replace(/[^0-9]/g, '');
+    let textcontent_manga = dom_seiga.window.document.querySelectorAll("#main .search_tab a")[0].textContent;
+    textcontent_manga = textcontent_manga.replace(/[^0-9]/g, '');
 
     // チャンネル整理
     const data_ch = responce_ch.data;
@@ -138,10 +143,11 @@ export default async function (req: NowRequest, res: NowResponse) {
 
 
     const resdata = {
-      'video': meta_seiga[0].textContent,
-      'mylist': meta_seiga[1].textContent,
-      'illust': meta_seiga[2].textContent,
-      'live': meta_seiga[3].textContent,
+      'video': meta_main[0].textContent,
+      'mylist': meta_main[1].textContent,
+      'illust': textcontent_illust,
+      'manga': textcontent_manga,
+      'live': meta_main[3].textContent,
       'channel': meta_ch[0] && meta_ch[0].textContent ? meta_ch[0].textContent : '0',
       'blomaga': meta_blomaga[0] && meta_blomaga[0].textContent ? meta_blomaga[0].textContent : '0',
       'atsumaru': textcontent_atsumaru,
