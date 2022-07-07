@@ -55,7 +55,6 @@ export default async function (req: NowRequest, res: NowResponse) {
         commentCounter = commentCounter.substring(0, commentCounter.indexOf(' '));
 
         var mylistCounter:string = coutnertext.substring(coutnertext.indexOf('クリップ：') + 5);
-        mylistCounter = commentCounter.substring(0, commentCounter.indexOf(' '));
 
         var contentsdata: object = {
           contentId: content_id,
