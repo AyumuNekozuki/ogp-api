@@ -11,7 +11,8 @@ import { JSDOM } from "jsdom";
  * @param res HTTP responce
  */
 export default async function (req: NowRequest, res: NowResponse) {
-  const keyword = req.query.q;
+  const keyword:string = encodeURI(req.query.q);
+
   const _offset = req.query._offset;
   if (!keyword) {
     errorResponce(res);
