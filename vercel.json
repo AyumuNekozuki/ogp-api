@@ -53,6 +53,24 @@
         "Access-Control-Allow-Origin": "*",
         "User-Agent": "vercel serveless function"
       }
+    },
+    {
+      "src": "/api/nico/blomaga/keyword",
+      "methods": ["GET"],
+      "dest": "/api/nico/blomaga/keyword",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "vercel serveless function"
+      }
+    },
+    {
+      "src": "/api/nico/blomaga/tag",
+      "methods": ["GET"],
+      "dest": "/api/nico/blomaga/tag",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "vercel serveless function"
+      }
     }
   ]
 }
