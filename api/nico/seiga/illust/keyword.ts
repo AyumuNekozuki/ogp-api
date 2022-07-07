@@ -11,9 +11,35 @@ import { JSDOM } from "jsdom";
  * @param res HTTP responce
  */
 export default async function (req: NowRequest, res: NowResponse) {
-  const keyword:string = encodeURI(req.query.q);
-
+  const keyword = encodeURI(req.query.q + '');
   const _offset = req.query._offset;
+
+  const _sort_query = req.query._sort;
+  let _sort_order :string = '';
+  switch (_sort_query) {
+    case '-viewCounter':
+      _sort_order = 'image_view';
+      break;
+    case '+viewCounter':
+      _sort_order = 'image_view_a';
+      break;
+    case '-commentCounter':
+      _sort_order = 'comment_count';
+      break;
+    case '+commentCounter':
+      _sort_order = 'comment_count_a';
+      break;
+    case '-mylistCounter':
+      _sort_order = 'clip_count';
+      break;
+    case '+mylistCounter':
+      _sort_order = 'clip_count_a';
+      break;
+  
+    default:
+      break;
+  }
+
   if (!keyword) {
     errorResponce(res);
     return;
@@ -22,11 +48,11 @@ export default async function (req: NowRequest, res: NowResponse) {
   const _offset_num: number = Number(_offset) / 20;
 
   const urls = [
-    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + _offset_num,
-    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 1),
-    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 2),
-    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 3),
-    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 4),
+    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 1) + '&sort=' + _sort_order,
+    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 2) + '&sort=' + _sort_order,
+    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 3) + '&sort=' + _sort_order,
+    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 4) + '&sort=' + _sort_order,
+    'https://seiga.nicovideo.jp/search/' + keyword + '?page=' + calc_sum(_offset_num, 5) + '&sort=' + _sort_order,
   ]
 
 
@@ -35,7 +61,16 @@ export default async function (req: NowRequest, res: NowResponse) {
     const data = responce.map(res => res.data);
     const doms = data.map(data => new JSDOM(data));
     let datas: object[] = [];
+    let totalcount: string = '';
+
+    let counter:number = 0;
     doms.forEach(dom => {
+
+      if(counter == 0){
+        totalcount = dom.window.document.querySelectorAll('.refine .count')[2].textContent;
+        totalcount = totalcount.replace(/[^0-9]/g, '');
+        counter++;
+      }
 
       var items = dom.window.document.querySelectorAll('.illust_pict_all .illust_list_img');
       items.forEach(item => {
@@ -66,10 +101,17 @@ export default async function (req: NowRequest, res: NowResponse) {
         }
         datas.push(contentsdata);
       })
-
     })
 
-    res.status(200).json(datas);
+    const responsedata: object = {
+      meta: {
+        status: 200,
+        totalcount: totalcount,
+      },
+      data: datas, 
+    }
+
+    res.status(200).json(responsedata);
   } catch (e) {
     errorResponce(res);
   }

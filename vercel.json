@@ -10,15 +10,6 @@
       }
     },
     {
-      "src": "/api/ogpimg",
-      "methods": ["GET"],
-      "dest": "/api/ogpimg",
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "User-Agent": "facebookexternalhit"
-      }
-    },
-    {
       "src": "/api/nico/snapshot2",
       "methods": ["GET"],
       "dest": "/api/nico/shapshot2",
@@ -28,9 +19,9 @@
       }
     },
     {
-      "src": "/api/nico/seiga/keyword",
+      "src": "/api/nico/seiga/illust/keyword",
       "methods": ["GET"],
-      "dest": "/api/nico/seiga/keyword",
+      "dest": "/api/nico/seiga/illust/keyword",
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "User-Agent": "vercel serveless function"
