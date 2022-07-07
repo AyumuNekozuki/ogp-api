@@ -38,6 +38,7 @@ export default async function (req: NowRequest, res: NowResponse) {
       break;
   
     default:
+      _sort_order = 'image_view';
       break;
   }
 
@@ -49,11 +50,11 @@ export default async function (req: NowRequest, res: NowResponse) {
   const _offset_num: number = Number(_offset) / 20;
 
   const urls = [
-    `https://seiga.nicovideo.jp/search/${keyword}?page=` + calc_sum(_offset_num, 1) +`&sort=${_sort_order}&target=${target}`,
-    `https://seiga.nicovideo.jp/search/${keyword}?page=` + calc_sum(_offset_num, 2) +`&sort=${_sort_order}&target=${target}`,
-    `https://seiga.nicovideo.jp/search/${keyword}?page=` + calc_sum(_offset_num, 3) +`&sort=${_sort_order}&target=${target}`,
-    `https://seiga.nicovideo.jp/search/${keyword}?page=` + calc_sum(_offset_num, 4) +`&sort=${_sort_order}&target=${target}`,
-    `https://seiga.nicovideo.jp/search/${keyword}?page=` + calc_sum(_offset_num, 5) +`&sort=${_sort_order}&target=${target}`,
+    `https://seiga.nicovideo.jp/tag/${keyword}?page=` + calc_sum(_offset_num, 1) +`&sort=${_sort_order}&target=${target}`,
+    `https://seiga.nicovideo.jp/tag/${keyword}?page=` + calc_sum(_offset_num, 2) +`&sort=${_sort_order}&target=${target}`,
+    `https://seiga.nicovideo.jp/tag/${keyword}?page=` + calc_sum(_offset_num, 3) +`&sort=${_sort_order}&target=${target}`,
+    `https://seiga.nicovideo.jp/tag/${keyword}?page=` + calc_sum(_offset_num, 4) +`&sort=${_sort_order}&target=${target}`,
+    `https://seiga.nicovideo.jp/tag/${keyword}?page=` + calc_sum(_offset_num, 5) +`&sort=${_sort_order}&target=${target}`,
   ]
 
 
@@ -68,39 +69,28 @@ export default async function (req: NowRequest, res: NowResponse) {
     doms.forEach(dom => {
 
       if(counter == 0){
-        totalcount = dom.window.document.querySelectorAll('.refine .count')[2].textContent || '-';
+        totalcount = dom.window.document.querySelectorAll('.refine_list li a span.count')[2].textContent || '-';
         totalcount = totalcount.replace(/[^0-9]/g, '');
         counter++;
       }
 
 
-      if(dom.window.document.querySelectorAll('.illust_pict_all .illust_list_img')){
-        var items = dom.window.document.querySelectorAll('.illust_pict_all .illust_list_img');
+      if(dom.window.document.querySelectorAll('.item_list .list_item')){
+        var items = dom.window.document.querySelectorAll('.item_list .list_item');
         items.forEach(item => {
 
           // コンテンツID
-          var url:string = item.querySelector('.center_img_inner ').getAttribute('href');
+          var url:string = item.querySelector('a').getAttribute('href');
           var content_id:string = url.substring(url.indexOf('im'));
-          content_id = content_id.substring(0, content_id.indexOf('?'));
-
-
-          // カウンター
-          var coutnertext: string = item.querySelectorAll('.counter_info')[0].textContent;
-          var viewCounter:string = coutnertext.substring(coutnertext.indexOf('閲覧：') + 3);
-          viewCounter = viewCounter.substring(0, viewCounter.indexOf(' '));
-        
-          var commentCounter:string = coutnertext.substring(coutnertext.indexOf('コメ：') + 3);
-          commentCounter = commentCounter.substring(0, commentCounter.indexOf(' '));
-
-          var mylistCounter:string = coutnertext.substring(coutnertext.indexOf('クリップ：') + 5);
 
           var contentsdata: object = {
             contentId: content_id,
-            title: item.querySelectorAll('.illust_title a')[0].textContent,
-            thumbnailUrl: item.querySelectorAll('.center_img_inner img')[0].getAttribute('src'),
-            viewCounter: viewCounter,
-            commentCounter: commentCounter,
-            mylistCounter: mylistCounter,
+            title: item.querySelectorAll('.illust_info .title')[0].textContent,
+            userName: item.querySelectorAll('.illust_info .user')[0].textContent,
+            thumbnailUrl: item.querySelectorAll('.thum img')[0].getAttribute('src'),
+            viewCounter: item.querySelectorAll('.illust_count .view')[0].textContent,
+            commentCounter: item.querySelectorAll('.illust_count .comment')[0].textContent,
+            mylistCounter: item.querySelectorAll('.illust_count .clip')[0].textContent,
           }
           datas.push(contentsdata);
         })
