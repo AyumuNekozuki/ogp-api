@@ -35,6 +35,24 @@
         "Access-Control-Allow-Origin": "*",
         "User-Agent": "vercel serveless function"
       }
+    },
+    {
+      "src": "/api/nico/seiga/manga/keyword",
+      "methods": ["GET"],
+      "dest": "/api/nico/seiga/manga/keyword",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "vercel serveless function"
+      }
+    },
+    {
+      "src": "/api/nico/seiga/manga/tag",
+      "methods": ["GET"],
+      "dest": "/api/nico/seiga/manga/tag",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "vercel serveless function"
+      }
     }
   ]
 }
