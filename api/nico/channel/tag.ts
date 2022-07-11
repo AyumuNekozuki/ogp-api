@@ -43,11 +43,11 @@ export default async function (req: NowRequest, res: NowResponse) {
   const _offset_num: number = Number(_offset) / 20;
 
   const urls = [
-    `https://ch.nicovideo.jp/search/${keyword}?type=channel&page=` + calc_sum(_offset_num, 1) +`&sort=${_sort_order}`,
-    `https://ch.nicovideo.jp/search/${keyword}?type=channel&page=` + calc_sum(_offset_num, 2) +`&sort=${_sort_order}`,
-    `https://ch.nicovideo.jp/search/${keyword}?type=channel&page=` + calc_sum(_offset_num, 3) +`&sort=${_sort_order}`,
-    `https://ch.nicovideo.jp/search/${keyword}?type=channel&page=` + calc_sum(_offset_num, 4) +`&sort=${_sort_order}`,
-    `https://ch.nicovideo.jp/search/${keyword}?type=channel&page=` + calc_sum(_offset_num, 5) +`&sort=${_sort_order}`,
+    `https://ch.nicovideo.jp/search/${keyword}?type=channel&mode=t&page=` + calc_sum(_offset_num, 1) +`&sort=${_sort_order}`,
+    `https://ch.nicovideo.jp/search/${keyword}?type=channel&mode=t&page=` + calc_sum(_offset_num, 2) +`&sort=${_sort_order}`,
+    `https://ch.nicovideo.jp/search/${keyword}?type=channel&mode=t&page=` + calc_sum(_offset_num, 3) +`&sort=${_sort_order}`,
+    `https://ch.nicovideo.jp/search/${keyword}?type=channel&mode=t&page=` + calc_sum(_offset_num, 4) +`&sort=${_sort_order}`,
+    `https://ch.nicovideo.jp/search/${keyword}?type=channel&mode=t&page=` + calc_sum(_offset_num, 5) +`&sort=${_sort_order}`,
   ]
 
 

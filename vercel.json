@@ -71,6 +71,24 @@
         "Access-Control-Allow-Origin": "*",
         "User-Agent": "vercel serveless function"
       }
+    },
+    {
+      "src": "/api/nico/channel/keyword",
+      "methods": ["GET"],
+      "dest": "/api/nico/channel/keyword",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "vercel serveless function"
+      }
+    },
+    {
+      "src": "/api/nico/channel/tag",
+      "methods": ["GET"],
+      "dest": "/api/nico/channel/tag",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "User-Agent": "vercel serveless function"
+      }
     }
   ]
 }
