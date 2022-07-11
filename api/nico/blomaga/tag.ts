@@ -75,11 +75,11 @@ export default async function (req: NowRequest, res: NowResponse) {
           // コンテンツID
           var url:string = item.querySelector('.search_article_detail a').getAttribute('href');
           var content_id:string = url.substring(url.indexOf('/ar') + 1);
-          content_id = content_id.substring(0, content_id.indexOf('?'));
+          // content_id = content_id.substring(0, content_id.indexOf('?'));
 
           // チャンネルID
           var channel_id:string = item.querySelectorAll('.search_article_detail .thumb_article img')[0].getAttribute('src');
-          channel_id = channel_id.substring(channel_id.indexOf('article_thumbnail/ch') + 18);
+          channel_id = channel_id.substring(channel_id.indexOf('article_thumbnail/ch') + 20);
           channel_id = channel_id.substring(0, channel_id.indexOf('/'));
 
           var contentsdata: object = {
